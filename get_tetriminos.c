@@ -6,12 +6,12 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:09 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/22 23:25:29 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/23 23:48:09 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fillit.h"
+#include <stdio.h>
 
 char		read_tet(int fd, char tet[SZ_TET][SZ_TET])
 {
@@ -56,25 +56,24 @@ void		catch_coords(t_tet *tet, char rd[SZ_TET][SZ_TET], char i, char j)
 
 void		normallize_coords(t_tet *tet)
 {
-	char	min_i;
-	char	min_j;
 	char	i;
+	char	j;
+	char	n;
 
-	i = 0;
-	min_i = tet->coords[0][0];
-	min_j = tet->coords[0][1];
-	while (++i < SZ_TET)
+	i = tet->coords[0][0];
+	j = tet->coords[0][1];
+	n = 0;
+	while (++n < SZ_TET)
+		if (tet->coords[n][0] < i)
+		{
+			i = tet->coords[n][0];
+			j = tet->coords[n][1];
+		}
+	n = -1;
+	while (++n < SZ_TET)
 	{
-		if (tet->coords[i][0] < min_i)
-			min_i = tet->coords[i][0];
-		if (tet->coords[i][1] < min_j)
-			min_j = tet->coords[i][1];
-	}
-	i = -1;
-	while (++i < SZ_TET)
-	{
-		tet->coords[i][0] -= min_i;
-		tet->coords[i][1] -= min_j;
+		tet->coords[n][0] -= i;
+		tet->coords[n][1] -= j;
 	}
 }
 
