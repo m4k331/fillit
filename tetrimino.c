@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/22 17:13:00 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/23 23:45:01 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/24 22:17:07 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void		add_coord_tet(t_tet *tet, char i, char j)
 		tet->amount = -1;
 }
 
-char		insert_tet(t_tet *tet, t_square *sq, short i, short j)
+char		insert_tet(t_tet *tet, t_square *sq, char i, char j)
 {
-	short	num_coord;
-	short	mod_i;
-	short	mod_j;
+	char	num_coord;
+	char	mod_i;
+	char	mod_j;
 
 	num_coord = -1;
 	mod_i = 0;
@@ -62,4 +62,13 @@ char		insert_tet(t_tet *tet, t_square *sq, short i, short j)
 		}
 	}
 	return (1);
+}
+
+void		clean_tet(t_tet *tet, t_square *sq, char i, char j)
+{
+	char	coord;
+
+	coord = -1;
+	while (++coord < SZ_TET)
+		sq->sq[tet->coords[coord][0] + i][tet->coords[coord][1] + j] = 46;
 }

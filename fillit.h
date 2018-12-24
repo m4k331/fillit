@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:41 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/23 23:45:16 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/24 22:24:26 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ typedef struct	s_tet
 typedef struct	s_square
 {
 	char		**sq;
-	short		n;
+	char		n;
+	char		set_tet;
+	char		max_tet;
 }				t_square;
 
 t_tet			*new_tet(char ch);
 void			add_coord_tet(t_tet *tet, char i, char j);
-char			insert_tet(t_tet *tet, t_square *sq, short i, short j);
 char			get_tetriminos(int fd, t_tet *tets[MAX_TET]);
+char			insert_tet(t_tet *tet, t_square *sq, char i, char j);
+void			clean_tet(t_tet *tet, t_square *sq, char i, char j);
+t_square		*create_square(char n, char max_tet);
+void			del_square(t_square *sq);
 void			print_square(t_square *sq);
-t_square		*create_square(short n);
 
 #endif
