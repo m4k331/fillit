@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:41 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/25 15:24:18 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/25 21:19:34 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_tet			*new_tet(char ch);
 void			add_coord_tet(t_tet *tet, char i, char j);
 char			get_tetriminos(int fd, t_tet *tets[MAX_TET]);
 char			insert_tet(t_tet *tet, t_square *sq, char i, char j);
-void			clean_tet(t_tet *tet, t_square *sq, char i, char j);
 t_square		*create_square(char n, char max_tet);
 void			del_square(t_square *sq);
 void			print_square(t_square *sq);

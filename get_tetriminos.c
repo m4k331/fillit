@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:09 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/25 17:23:14 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/25 21:15:08 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char		read_tet(int fd, char tet[SZ_TET][SZ_TET])
 {
-	char	i;
-	char	j;
+	int		i;
+	int		j;
 	char	amount;
 
 	i = 0;
@@ -40,7 +40,7 @@ char		read_tet(int fd, char tet[SZ_TET][SZ_TET])
 	return (-1);
 }
 
-void		catch_coords(t_tet *tet, char rd[SZ_TET][SZ_TET], char i, char j)
+void		catch_coords(t_tet *tet, char rd[SZ_TET][SZ_TET], short i, short j)
 {
 	if (rd[i][j] == 35 && (rd[i][j] = 46))
 		add_coord_tet(tet, i, j);
@@ -58,7 +58,7 @@ void		normallize_coords(t_tet *tet)
 {
 	char	i;
 	char	j;
-	char	n;
+	short	n;
 
 	i = tet->coords[0][0];
 	j = tet->coords[0][1];
@@ -79,8 +79,8 @@ void		normallize_coords(t_tet *tet)
 
 char		set_coords_tet(t_tet *tet, char rd[SZ_TET][SZ_TET])
 {
-	char	i;
-	char	j;
+	short	i;
+	short	j;
 
 	i = 0;
 	while (!(j = 0) && i < SZ_TET)
@@ -100,7 +100,7 @@ char		set_coords_tet(t_tet *tet, char rd[SZ_TET][SZ_TET])
 char		get_tetriminos(int fd, t_tet *tets[MAX_TET])
 {
 	char	rd[SZ_TET][SZ_TET];
-	char	i;
+	short	i;
 	char	rt;
 	char	count_tet;
 

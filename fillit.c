@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 16:19:03 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/25 17:22:01 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/25 21:34:03 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char			fill_square(t_tet *tets[MAX_TET], t_square **sq, char i, char j)
 	{
 		while (j < (*sq)->n)
 		{
-			if (insert_tet(tets[(*sq)->set_tet], (*sq), i, j))
+			if (insert_tet(tets[(int)(*sq)->set_tet], (*sq), i, j))
 				if (++(*sq)->set_tet && fill_square(tets, sq, i, j))
 					return ((*sq)->max_tet == (*sq)->set_tet);
 			j++;
@@ -59,6 +59,7 @@ int				main(int ac, char **av)
 	t_square	*sq;
 
 	fd = -1;
+	sq = 0;
 	if (!(n = 0) && ac == 2)
 	{
 		if ((fd = open(av[1], O_RDONLY)) != -1)
@@ -77,5 +78,5 @@ int				main(int ac, char **av)
 	}
 	else
 		ft_putstr_fd("usage: fillit target_file\n", 2);
-	return ((int)(sq = 0));
+	return (0);
 }
