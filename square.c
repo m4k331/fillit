@@ -6,41 +6,11 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 15:32:14 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/24 22:25:03 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/25 17:25:58 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-t_square		*create_square(char n, char max_tet)
-{
-	t_square	*sq;
-	char		i;
-
-	i = -1;
-	if ((sq = (t_square*)malloc(sizeof(t_square))))
-	{
-		if ((sq->sq = (char**)malloc(sizeof(char*) * n)))
-		{
-			while (++i < (sq->n = n))
-				if (!(sq->sq[i] = (char*)malloc(sizeof(char) * n)))
-					break ;
-				else
-					ft_memset(sq->sq[i], 46, n);
-			sq->set_tet = 0;
-			sq->max_tet = max_tet;
-			if (i != n && (n = 0))
-			{
-				while (n < i)
-					ft_memdel((void**)&sq->sq[n]);
-				ft_memdel((void**)&sq);
-			}
-		}
-		else
-			ft_memdel((void**)&sq);
-	}
-	return (sq);
-}
 
 void			del_square(t_square *sq)
 {
@@ -53,6 +23,33 @@ void			del_square(t_square *sq)
 			ft_memdel((void**)&sq->sq[i]);
 		ft_memdel((void**)&sq);
 	}
+}
+
+t_square		*create_square(char n, char max_tet)
+{
+	t_square	*sq;
+	char		i;
+
+	i = -1;
+	if ((sq = (t_square*)malloc(sizeof(t_square))))
+	{
+		if ((sq->sq = (char**)malloc(sizeof(char*) * n)))
+		{
+			while (++i < n)
+				if (!(sq->sq[i] = (char*)malloc(sizeof(char) * n)))
+					break ;
+				else
+					ft_memset(sq->sq[i], 46, n);
+			sq->n = i;
+			sq->set_tet = 0;
+			sq->max_tet = max_tet;
+			if (i != n)
+				del_square(sq);
+		}
+		else
+			ft_memdel((void**)&sq);
+	}
+	return (sq);
 }
 
 void			print_square(t_square *sq)

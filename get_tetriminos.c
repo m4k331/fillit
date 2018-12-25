@@ -6,7 +6,7 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:09 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/24 23:09:10 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/25 17:23:14 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void		catch_coords(t_tet *tet, char rd[SZ_TET][SZ_TET], char i, char j)
 {
 	if (rd[i][j] == 35 && (rd[i][j] = 46))
 		add_coord_tet(tet, i, j);
-	if (i + 1 < SZ_TET && ++i)
-		rd[i][j] == 35 ? catch_coords(tet, rd, i, j) : i--;
-	if (j + 1 < SZ_TET && ++j)
-		rd[i][j] == 35 ? catch_coords(tet, rd, i, j) : j--;
-	if (j - 1 > -1)
-		rd[i][--j] == 35 ? catch_coords(tet, rd, i, j) : j++;
-	if (i - 1 > -1)
-		rd[--i][j] == 35 ? catch_coords(tet, rd, i, j) : i++;
+	if (i + 1 < SZ_TET && rd[i + 1][j] == 35)
+		catch_coords(tet, rd, i + 1, j);
+	if (j + 1 < SZ_TET && rd[i][j + 1] == 35)
+		catch_coords(tet, rd, i, j + 1);
+	if (i - 1 > -1 && rd[i - 1][j] == 35)
+		catch_coords(tet, rd, i - 1, j);
+	if (j - 1 > -1 && rd[i][j - 1] == 35)
+		catch_coords(tet, rd, i, j - 1);
 }
 
 void		normallize_coords(t_tet *tet)
@@ -107,10 +107,8 @@ char		get_tetriminos(int fd, t_tet *tets[MAX_TET])
 	i = 0;
 	rt = -1;
 	count_tet = 0;
-	write(1,"q",1);
 	while ((rt != 0) && (rt = read_tet(fd, rd)) > -1 && ++count_tet)
 	{
-		ft_putnbr(rt);
 		if (!(tets[i] = new_tet(65 + i)) || \
 		!set_coords_tet(tets[i], rd) || rt == -1)
 		{
@@ -124,6 +122,5 @@ char		get_tetriminos(int fd, t_tet *tets[MAX_TET])
 		}
 		i++;
 	}
-	write(1,">",1);ft_putnbr(rt);
 	return (rt ? 0 : count_tet);
 }
