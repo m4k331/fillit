@@ -6,15 +6,15 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/24 16:19:03 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/25 21:34:03 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/26 16:53:09 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char			init_size_square(char amount_tet)
+char			init_size_square(short amount_tet)
 {
-	char		sz;
+	short		sz;
 	short		amount_sq;
 
 	sz = 0;
@@ -25,7 +25,7 @@ char			init_size_square(char amount_tet)
 	return (sz);
 }
 
-char			fill_square(t_tet *tets[MAX_TET], t_square **sq, char i, char j)
+char			fill_square(t_tet *tets[MAX_TET], t_square **sq, short i, short j)
 {
 	t_square	*ex_sq;
 
@@ -33,7 +33,7 @@ char			fill_square(t_tet *tets[MAX_TET], t_square **sq, char i, char j)
 	{
 		while (j < (*sq)->n)
 		{
-			if (insert_tet(tets[(int)(*sq)->set_tet], (*sq), i, j))
+			if (insert_tet(tets[(*sq)->set_tet], (*sq), i, j))
 				if (++(*sq)->set_tet && fill_square(tets, sq, i, j))
 					return ((*sq)->max_tet == (*sq)->set_tet);
 			j++;
@@ -54,7 +54,7 @@ char			fill_square(t_tet *tets[MAX_TET], t_square **sq, char i, char j)
 int				main(int ac, char **av)
 {
 	int			fd;
-	char		n;
+	short		n;
 	t_tet		*tets[MAX_TET];
 	t_square	*sq;
 

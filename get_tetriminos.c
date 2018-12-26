@@ -6,18 +6,17 @@
 /*   By: ahugh <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 12:06:09 by ahugh             #+#    #+#             */
-/*   Updated: 2018/12/25 21:15:08 by ahugh            ###   ########.fr       */
+/*   Updated: 2018/12/26 16:56:20 by ahugh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char		read_tet(int fd, char tet[SZ_TET][SZ_TET])
 {
-	int		i;
-	int		j;
-	char	amount;
+	short		i;
+	short		j;
+	short	amount;
 
 	i = 0;
 	amount = 0;
@@ -56,8 +55,8 @@ void		catch_coords(t_tet *tet, char rd[SZ_TET][SZ_TET], short i, short j)
 
 void		normallize_coords(t_tet *tet)
 {
-	char	i;
-	char	j;
+	short	i;
+	short	j;
 	short	n;
 
 	i = tet->coords[0][0];
@@ -101,8 +100,8 @@ char		get_tetriminos(int fd, t_tet *tets[MAX_TET])
 {
 	char	rd[SZ_TET][SZ_TET];
 	short	i;
-	char	rt;
-	char	count_tet;
+	short	rt;
+	short	count_tet;
 
 	i = 0;
 	rt = -1;
